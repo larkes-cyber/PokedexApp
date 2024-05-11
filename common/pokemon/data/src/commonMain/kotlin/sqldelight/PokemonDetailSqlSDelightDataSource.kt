@@ -19,7 +19,7 @@ class PokemonDetailSqlSDelightDataSource(
             name = pokemonDetailEntity.name,
             species = pokemonDetailEntity.species,
             weight = pokemonDetailEntity.weight,
-            stats = pokemonDetailEntity.stats
+            stat = pokemonDetailEntity.stat
         )
     }
 

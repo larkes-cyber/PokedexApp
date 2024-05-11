@@ -8,8 +8,8 @@ import io.ktor.client.request.parameter
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
-import ktor.models.PokemonDetailDto
 import ktor.models.PokemonListDto
+import ktor.models.pokemon_detail.PokemonDetailDto
 
 class PokemonKtorDataSource(
     private val ktorClient:HttpClient

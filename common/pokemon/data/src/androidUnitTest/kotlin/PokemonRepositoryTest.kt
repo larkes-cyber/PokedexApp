@@ -6,9 +6,11 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import ktor.PokemonKtorDataSource
 import org.junit.Before
 import org.junit.Test
+import sqldelight.PokemonDetailSqlSDelightDataSource
 import sqldelight.PokemonSqlDelightDataSource
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -25,7 +27,9 @@ class PokemonRepositoryTest {
             val db = PokedexDatabase(driver)
             val httpClient = HttpClient(CIO.create()) {
                 install(ContentNegotiation) {
-                    json()
+                    json(Json{
+                        ignoreUnknownKeys = true
+                    })
                 }
                 defaultRequest {
                     url("https://pokeapi.co")
@@ -33,7 +37,8 @@ class PokemonRepositoryTest {
             }
             val sqlSource = PokemonSqlDelightDataSource(db)
             val ktorSource = PokemonKtorDataSource(httpClient)
-            repository = PokemonRepositoryImpl(ktorSource, sqlSource)
+            val sqlSource2 = PokemonDetailSqlSDelightDataSource(db)
+            repository = PokemonRepositoryImpl(ktorSource, sqlSource, sqlSource2)
         }
     }
 
@@ -65,6 +70,25 @@ class PokemonRepositoryTest {
             val pokemons2 = repository.fetchPokemons(limit, offset, refresh = true)
             pokemons1.forEachIndexed { index, pokemon ->
                 assertTrue(pokemon != pokemons2[index])
+            }
+        }
+    }
+
+    @Test
+    fun `Should fetch pokemon detail info`(){
+        runBlocking {
+            val id = "35"
+            val detail = repository.fetchPokemonAboutInfo(id)
+            println(detail)
+            assertTrue(detail.name == "clefairy")
+        }
+    }
+
+    @Test
+    fun `Should fetch different pokemons detail info`(){
+        runBlocking {
+            (0..40).forEach{
+                println(repository.fetchPokemonAboutInfo(it.toString()))
             }
         }
     }
