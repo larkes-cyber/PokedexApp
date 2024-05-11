@@ -6,12 +6,7 @@ CREATE TABLE pokemonDetailEntity(
     height TEXT,
     weight TEXT,
     abilities TEXT,
-    hp TEXT,
-    atk TEXT,
-    def TEXT,
-    spAtk TEXT,
-    spDef TEXT,
-    spd TEXT
+    stat TEXT
 );
 
 insertPokemon:
@@ -24,13 +19,8 @@ INTO pokemonDetailEntity(
     height,
     weight,
     abilities,
-    hp,
-    atk,
-    def,
-    spAtk,
-    spDef,
-    spd
-)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);
+    stat
+)VALUES(?,?,?,?,?,?,?,?);
 
 fetchPokemon:
 SELECT *

@@ -1,5 +1,8 @@
+import com.larkes.pokedexapp.database.PokemonDetailEntity
 import com.larkes.pokedexapp.database.PokemonEntity
+import kotlinx.serialization.json.Json
 import ktor.PokemonKtorDataSource
+import ktor.models.StatsDto
 import models.Pokemon
 import models.PokemonAboutInfo
 import sqldelight.PokemonDetailSqlSDelightDataSource
@@ -55,25 +58,46 @@ class PokemonRepositoryImpl(
             return PokemonAboutInfo(
                 name = cachedPokemon.name,
                 abilities = cachedPokemon.abilities?.split(",") ?: emptyList(),
-                atk = cachedPokemon.atk?.toInt(),
-                def = cachedPokemon.def?.toInt(),
-                height = cachedPokemon.height?.toFloat(),
-                hp = cachedPokemon.hp?.toInt(),
-                spAtk = cachedPokemon.spAtk?.toInt(),
-                spDef = cachedPokemon.spDef?.toInt(),
-                spd = cachedPokemon.spd?.toInt(),
+                height = cachedPokemon.height?.toInt(),
                 species = cachedPokemon.species,
                 types = cachedPokemon.types?.split(",") ?: emptyList(),
-                weight = cachedPokemon.weight?.toFloat()
+                weight = cachedPokemon.weight?.toInt(),
+                stat = Json.decodeFromString(StatsDto.serializer(), cachedPokemon.stat ?: "[]").list
             )
         }else{
             val response = pokemonKtorDataSource.fetchPokemonInfo(id)
 
+
+            val stat:List<Pair<String, Int>> = response.stats?.map {
+                Pair(it!!.stat!!.name!!, it.baseStat!!)
+            } ?: emptyList()
+
             val info = PokemonAboutInfo(
                 name = response.name ?: "",
-                abilities = response.abilities.map { it?.ability?.name ?: "" },
-                atk = response.stats[0].stat.
+                abilities = response.abilities?.map { it?.ability?.name ?: "" } ?: listOf(),
+                height = response.height,
+                species = response.species?.name ?: "",
+                stat = stat,
+                types = response.types?.map { it!!.type!!.name!! } ?: listOf(),
+                weight = response.weight
             )
+
+            pokemonDetailSqlSDelightDataSource.cleanPokemon(id)
+
+            pokemonDetailSqlSDelightDataSource.insertPokemonDetail(
+                PokemonDetailEntity(
+                    id = id,
+                    name = response.name ?: "",
+                    abilities = info.abilities.joinToString(","),
+                    height = response.height.toString(),
+                    species = response.species?.name ?: "",
+                    types = info.types.joinToString(","),
+                    weight = response.weight.toString(),
+                    stat = Json.encodeToString(StatsDto.serializer(), StatsDto(stat))
+                )
+            )
+
+            return info
         }
     }
 

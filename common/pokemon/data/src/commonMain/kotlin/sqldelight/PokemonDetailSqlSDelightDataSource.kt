@@ -14,18 +14,12 @@ class PokemonDetailSqlSDelightDataSource(
         queries.insertPokemon(
             id = pokemonDetailEntity.id,
             abilities = pokemonDetailEntity.abilities,
-            atk = pokemonDetailEntity.atk,
-            def = pokemonDetailEntity.def,
             types = pokemonDetailEntity.types,
             height = pokemonDetailEntity.height,
-            hp = pokemonDetailEntity.hp,
             name = pokemonDetailEntity.name,
-            spAtk = pokemonDetailEntity.spAtk,
-            spDef = pokemonDetailEntity.spDef,
-            spd = pokemonDetailEntity.spd,
             species = pokemonDetailEntity.species,
-            weakness = pokemonDetailEntity.weakness,
-            weight = pokemonDetailEntity.weight
+            weight = pokemonDetailEntity.weight,
+            stats = pokemonDetailEntity.stats
         )
     }
 
