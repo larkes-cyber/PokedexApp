@@ -1,6 +1,7 @@
 package sqldelight
 
 import com.larkes.pokedexapp.PokedexDatabase
+import com.larkes.pokedexapp.database.PokemonDetailEntity
 import com.larkes.pokedexapp.database.PokemonEntity
 
 class PokemonSqlDelightDataSource(

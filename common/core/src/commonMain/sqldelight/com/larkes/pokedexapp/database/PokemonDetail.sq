@@ -1,0 +1,42 @@
+CREATE TABLE pokemonDetailEntity(
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    types TEXT,
+    species TEXT,
+    height TEXT,
+    weight TEXT,
+    abilities TEXT,
+    hp TEXT,
+    atk TEXT,
+    def TEXT,
+    spAtk TEXT,
+    spDef TEXT,
+    spd TEXT
+);
+
+insertPokemon:
+INSERT OR REPLACE
+INTO pokemonDetailEntity(
+    id,
+    name,
+    types,
+    species,
+    height,
+    weight,
+    abilities,
+    hp,
+    atk,
+    def,
+    spAtk,
+    spDef,
+    spd
+)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+fetchPokemon:
+SELECT *
+FROM pokemonDetailEntity
+WHERE id = ?;
+
+clearPokemon:
+DELETE FROM pokemonDetailEntity
+WHERE id = ?;
