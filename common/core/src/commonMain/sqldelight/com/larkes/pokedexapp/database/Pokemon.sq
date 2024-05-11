@@ -1,3 +1,19 @@
 CREATE TABLE pokemonEntity(
-    id TEXT PRIMARY KEY NOT NULL
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
 );
+
+
+fetchPokemons:
+SELECT *
+FROM pokemonEntity;
+
+insertPokemon:
+INSERT OR REPLACE
+INTO pokemonEntity(
+    id,
+    name
+)VALUES(?,?);
+
+clearStorage:
+DELETE FROM pokemonEntity;

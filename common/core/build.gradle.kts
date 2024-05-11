@@ -28,7 +28,7 @@ kotlin{
             dependencies{
                 implementation(Dependencies.Ktor.cio)
                 implementation(Dependencies.Ktor.negotiation)
-                implementation(Dependencies.Ktor.core)
+                api(Dependencies.Ktor.core)
                 implementation(Dependencies.Ktor.serialization)
                 api(Dependencies.Koin.core)
                 api(Dependencies.Settings.settings)
