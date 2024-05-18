@@ -1,13 +1,17 @@
 package list
 
 import PokemonRepository
+import dev.icerock.moko.mvvm.flow.CFlow
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
+import dev.icerock.moko.mvvm.flow.cFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import di.Inject
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import list.models.PokemonItem
 import list.models.PokemonListAction
@@ -18,11 +22,23 @@ class PokemonListViewModel:ViewModel() {
 
     private val pokemonRepository:PokemonRepository = Inject.di.get()
 
-    private val _viewState:CMutableStateFlow<PokemonListViewState> = MutableStateFlow(PokemonListViewState()).cMutableStateFlow()
-    val viewState:CStateFlow<PokemonListViewState> = _viewState.cStateFlow()
 
-    private val _viewAction:CMutableStateFlow<PokemonListAction?> = MutableStateFlow<PokemonListAction?>(null).cMutableStateFlow()
-    val viewAction:CStateFlow<PokemonListAction?> = _viewAction.cStateFlow()
+    private val _pokemonList:CMutableStateFlow<List<PokemonItem>> = MutableStateFlow(emptyList<PokemonItem>()).cMutableStateFlow()
+    val pokemonList:CStateFlow<List<PokemonItem>> = _pokemonList.cStateFlow()
+
+    private val _isLoading:CMutableStateFlow<Boolean> = MutableStateFlow(false).cMutableStateFlow()
+    val isLoading:CStateFlow<Boolean> = _isLoading.cStateFlow()
+
+    private val _error:CMutableStateFlow<String> = MutableStateFlow("").cMutableStateFlow()
+    val error:CStateFlow<String> = _error.cStateFlow()
+
+    private val _offset:CMutableStateFlow<Int> = MutableStateFlow(5).cMutableStateFlow()
+
+    private val _selectedPokemon:CMutableStateFlow<String?> = MutableStateFlow<String?>(null).cMutableStateFlow()
+    val selectedPokemon:CStateFlow<String?> = _selectedPokemon.cStateFlow()
+
+    private val _viewAction = Channel<PokemonListAction>()
+    val viewAction: CFlow<PokemonListAction> get() = _viewAction.receiveAsFlow().cFlow()
 
     init {
         fetchNewPokemons()
@@ -30,22 +46,20 @@ class PokemonListViewModel:ViewModel() {
 
    private fun fetchNewPokemons(refresh:Boolean = false){
         viewModelScope.launch {
-            _viewState.value = viewState.value.copy(isLoading = true)
+            _isLoading.value = true
             try {
-                val pokemons = pokemonRepository.fetchPokemons(5, viewState.value.offset, refresh)
-                _viewState.value = viewState.value.copy(
-                    list = pokemons.map {PokemonItem(
-                                name = it.name,
-                                id = it.id,
-                                imageSrc = it.imageUrl
-                        )
-                    },
-                    offset = viewState.value.offset + 5
-                )
+                val pokemons = pokemonRepository.fetchPokemons(5, _offset.value, refresh)
+                _pokemonList.value = pokemons.map {PokemonItem(
+                    name = it.name,
+                    id = it.id,
+                    imageSrc = it.imageUrl
+                   )
+                }
+                _offset.value += 5
             }catch (e:Exception){
-                _viewState.value = viewState.value.copy(error = e.message ?: "")
+                _error.value = e.message ?: ""
             }finally {
-                _viewState.value = viewState.value.copy(isLoading = false)
+                _isLoading.value = false
             }
         }
     }
@@ -61,8 +75,8 @@ class PokemonListViewModel:ViewModel() {
     }
 
     private fun obtainPokemonClicked(id:String) {
-        _viewState.value = viewState.value.copy(selectedPokemon = id)
-        _viewAction.value = PokemonListAction.OpenPokemonDetail
+        _selectedPokemon.value = id
+        _viewAction.trySend(PokemonListAction.OpenPokemonDetail)
     }
 
 }
