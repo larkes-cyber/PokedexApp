@@ -69,6 +69,19 @@ object Dependencies {
         const val settings = "com.russhwolf:multiplatform-settings-no-arg:$version"
     }
 
+    object Other{
+        object ViewModel{
+            private const val version = "0.16.1"
+            const val core = "dev.icerock.moko:mvvm-core:$version"
+            const val flow = "dev.icerock.moko:mvvm-flow:$version"
+            const val compose = "dev.icerock.moko:mvvm-flow-compose:$version"
+            const val lifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
+        }
+        object Navigation{
+            private const val version = "2.7.0-alpha03"
+            const val core = "org.jetbrains.androidx.navigation:navigation-compose:$version"
+        }
+    }
 
 
 }

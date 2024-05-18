@@ -18,13 +18,12 @@ internal val ktorModule = module {
             }
 
             defaultRequest {
-                url("https://pokeapi.co/api/v2")
+                url("https://pokeapi.co")
             }
 
             install(HttpTimeout){
-                connectTimeoutMillis = 1500
-                requestTimeoutMillis = 3000
-                requestTimeoutMillis = 1000
+                connectTimeoutMillis = 15000
+                requestTimeoutMillis = 50000
             }
         }
     }
