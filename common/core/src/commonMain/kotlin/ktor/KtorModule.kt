@@ -14,6 +14,7 @@ internal val ktorModule = module {
                 json(Json{
                     prettyPrint = true
                     isLenient = true
+                    ignoreUnknownKeys = true
                 })
             }
 

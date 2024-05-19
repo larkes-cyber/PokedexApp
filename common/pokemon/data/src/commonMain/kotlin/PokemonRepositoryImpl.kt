@@ -50,7 +50,8 @@ class PokemonRepositoryImpl(
                 species = cachedPokemon.species,
                 types = cachedPokemon.types?.split(",") ?: emptyList(),
                 weight = cachedPokemon.weight?.toInt(),
-                stat = Json.decodeFromString(StatsDto.serializer(), cachedPokemon.stat ?: "[]").list
+                stat = Json.decodeFromString(StatsDto.serializer(), cachedPokemon.stat ?: "[]").list,
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
             )
         }else{
             val response = pokemonKtorDataSource.fetchPokemonInfo(id)
@@ -67,7 +68,8 @@ class PokemonRepositoryImpl(
                 species = response.species?.name ?: "",
                 stat = stat,
                 types = response.types?.map { it!!.type!!.name!! } ?: listOf(),
-                weight = response.weight
+                weight = response.weight,
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
             )
 
             pokemonDetailSqlSDelightDataSource.cleanPokemon(id)

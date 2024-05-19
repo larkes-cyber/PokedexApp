@@ -7,5 +7,6 @@ data class PokemonAboutInfo(
     val weight:Int?,
     val types:List<String>,
     val abilities:List<String>,
-    val stat:List<Pair<String, Int>>
+    val stat:List<Pair<String, Int>>,
+    val imageUrl:String
 )

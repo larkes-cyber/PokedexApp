@@ -12,6 +12,7 @@ import SharedSDK
 struct PokemonListScreen: View {
     
     private let viewModel = PokemonListViewModel()
+    @State private var isDetailPresented:Bool = false
     
     var body: some View {
         ObservingView(statePublisher: statePublisher(viewModel.viewStates())){ viewState in
@@ -19,6 +20,18 @@ struct PokemonListScreen: View {
                 viewModel.obtainEvent(viewEvent: event)
             }
         }
+        .onReceive(sharePublisher(viewModel.viewActions())){ action in
+            switch(action){
+                case PokemonListAction.OpenPokemonDetail():
+                    isDetailPresented = true
+                    break
+                default:
+                    break
+            }
+        }
+        .sheet(isPresented:$isDetailPresented, content: {
+            PokemonDetailScreen(id: viewModel.viewState.selectedPokemon ?? "")
+        })
     }
 }
 

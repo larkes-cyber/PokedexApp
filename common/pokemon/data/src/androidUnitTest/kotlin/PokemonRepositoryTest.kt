@@ -93,7 +93,7 @@ class PokemonRepositoryTest {
     @Test
     fun `Should fetch pokemon detail info`(){
         runBlocking {
-            val id = "35"
+            val id = "4"
             val detail = repository.fetchPokemonAboutInfo(id)
             println(detail)
             assertTrue(detail.name == "clefairy")

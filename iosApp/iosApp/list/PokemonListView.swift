@@ -48,6 +48,9 @@ struct PokemonListView: View {
                                 viewEvent(PokemonListEvent.EndScrolled())
                             }
                         })
+                        .onTapGesture(perform: {
+                            viewEvent(PokemonListEvent.PokemonClicked(id: item.id))
+                        })
                 }
                 
             }
