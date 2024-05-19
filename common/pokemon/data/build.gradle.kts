@@ -10,6 +10,7 @@ kotlin{
                 implementation(project(":common:core"))
                 implementation(project(":common:pokemon:api"))
                 implementation(Dependencies.Ktor.serialization)
+
             }
         }
         androidUnitTest{

@@ -38,6 +38,10 @@ object Dependencies {
             const val icons = "androidx.compose.material:material-icons-core:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
         }
+        object Image{
+            private const val version = "2.6.0"
+            const val core = "io.coil-kt:coil-compose:$version"
+        }
     }
 
 

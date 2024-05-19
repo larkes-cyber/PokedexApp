@@ -56,11 +56,9 @@ class PokemonRepositoryImpl(
         }else{
             val response = pokemonKtorDataSource.fetchPokemonInfo(id)
 
-
             val stat:List<Pair<String, Int>> = response.stats?.map {
                 Pair(it!!.stat!!.name!!, it.baseStat!!)
             } ?: emptyList()
-
             val info = PokemonAboutInfo(
                 name = response.name ?: "",
                 abilities = response.abilities?.map { it?.ability?.name ?: "" } ?: listOf(),
@@ -73,7 +71,6 @@ class PokemonRepositoryImpl(
             )
 
             pokemonDetailSqlSDelightDataSource.cleanPokemon(id)
-
             pokemonDetailSqlSDelightDataSource.insertPokemonDetail(
                 PokemonDetailEntity(
                     id = id,

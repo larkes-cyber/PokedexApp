@@ -11,19 +11,15 @@ import SharedSDK
 
 struct PokemonListItem: View {
     
-    @State private var dominantColor: Color = .white
     let pokemon:PokemonItem
     
     var body: some View {
         ZStack{
-            dominantColor
             HStack{
-                VStack{
+                VStack(alignment:.leading){
                     Text("#\(pokemon.id)")
                         .font(.title3)
-                        .foregroundColor(.black.opacity(0.7))
                     Text(pokemon.name)
-                        .foregroundColor(.black)
                         .font(.title)
                 }
                 Spacer()

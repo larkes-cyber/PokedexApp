@@ -32,6 +32,7 @@ class PokemonListViewModel:BaseSharedViewModel<PokemonListViewState, PokemonList
 
     private fun obtainSearchEntered(text:String) {
         viewModelScope.launch {
+            viewState = viewState.copy(searchText = text)
             if(text.isEmpty()){
                 viewState = viewState.copy(offset = 0, list = emptyList())
                 fetchNewPokemons()
@@ -45,6 +46,7 @@ class PokemonListViewModel:BaseSharedViewModel<PokemonListViewState, PokemonList
                         imageSrc = it.imageUrl
                     )
                 })
+                viewState = viewState.copy(isLoading = false)
             }
         }
     }

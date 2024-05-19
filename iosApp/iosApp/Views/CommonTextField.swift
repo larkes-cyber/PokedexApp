@@ -24,7 +24,7 @@ struct CommonTextField: View {
     var body: some View {
         ZStack(alignment:.leading){
             RoundedRectangle(cornerRadius: 10.0)
-                .foregroundColor(.gray.opacity(0.25))
+                .foregroundColor(.gray.opacity(0.17))
             
             if(value.isEmpty){
                 Text(hint)
