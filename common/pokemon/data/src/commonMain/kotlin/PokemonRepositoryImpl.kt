@@ -3,6 +3,7 @@ import com.larkes.pokedexapp.database.PokemonEntity
 import kotlinx.serialization.json.Json
 import ktor.PokemonKtorDataSource
 import ktor.models.StatsDto
+import mapper.toPokemon
 import models.Pokemon
 import models.PokemonAboutInfo
 import sqldelight.PokemonDetailSqlSDelightDataSource
@@ -22,31 +23,18 @@ class PokemonRepositoryImpl(
                 pokemonSqlDelightDataSource.clearStorage()
             }
             return response.results!!.map {
-
-                val splitedUrl = it?.url?.split("/")!!
-                val lastIndex = it.url.split("/").lastIndex
-                val id = splitedUrl[lastIndex - 1]
-
-                val converted = Pokemon(
-                    id = id,
-                    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png",
-                    name = it.name!!
-                )
+                val converted = it!!.toPokemon()
                 pokemonSqlDelightDataSource.insertPokemon(
                     PokemonEntity(
                     id = converted.id,
                      name = converted.name
-                 )
+                    )
                 )
                 converted
             }
         }else{
             return cachedPokemons.subList(offset, offset+limit).map {
-                Pokemon(
-                    id = it.id,
-                    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.id}.png",
-                    name = it.name
-                    )
+                it.toPokemon()
             }
         }
 
@@ -98,6 +86,12 @@ class PokemonRepositoryImpl(
             )
 
             return info
+        }
+    }
+
+    override suspend fun searchForPokemon(text: String): List<Pokemon> {
+        return pokemonSqlDelightDataSource.fetchPokemons().filter { it.id.contains(text) || it.name.contains(text) }.map {
+            it.toPokemon()
         }
     }
 

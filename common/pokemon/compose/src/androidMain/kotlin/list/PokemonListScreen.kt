@@ -6,7 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import dev.icerock.moko.mvvm.flow.compose.observeAsActions
+import com.adeo.kviewmodel.compose.ViewModel
+import com.adeo.kviewmodel.compose.observeAsState
 import list.models.PokemonListAction
 
 @Composable
@@ -14,21 +15,24 @@ fun PokemonListScreen(
     navController: NavController
 ) {
 
-    val viewModel: PokemonListViewModel = viewModel()
+   ViewModel(
+       factory = {PokemonListViewModel()}
+   ){viewModel ->
 
-    val viewState = viewModel.viewState.collectAsState()
+       val viewState = viewModel.viewStates().observeAsState()
+       val viewAction = viewModel.viewActions().observeAsState()
 
-    PokemonListView(viewState.value){
-        viewModel.onEvent(it)
-    }
+       PokemonListView(viewState.value){
+           viewModel.obtainEvent(it)
+       }
 
-    viewModel.viewAction.observeAsActions {action ->
-        when(action){
-            is PokemonListAction.OpenPokemonDetail -> {
-                navController.navigate(NavigationTree.Pokemon.List.name)
-            }
-            else -> {}
-        }
-    }
+       when(viewAction.value){
+           is PokemonListAction.OpenPokemonDetail -> {
+               navController.navigate(NavigationTree.Pokemon.List.name)
+           }
+           else -> {}
+       }
+   }
+
 
 }

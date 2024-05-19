@@ -8,7 +8,7 @@ kotlin{
         commonMain{
             dependencies{
                 implementation(Dependencies.Other.ViewModel.core)
-                implementation(Dependencies.Other.ViewModel.flow)
+                implementation(Dependencies.Other.ViewModel.odyssey)
                 api(project(":common:pokemon:api"))
                 implementation(project(":common:core"))
             }

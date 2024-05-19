@@ -1,16 +1,16 @@
 PODS:
-  - shared (1.0)
+  - ios_root (0.0.1)
 
 DEPENDENCIES:
-  - shared (from `../shared`)
+  - ios_root (from `../common/ios-root`)
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  ios_root:
+    :path: "../common/ios-root"
 
 SPEC CHECKSUMS:
-  shared: c133c49697085ba65e4031b78e671fc97617a40d
+  ios_root: a7c9058bd5b80767a77673db16f0d5b075a2700d
 
-PODFILE CHECKSUM: 78d6cc1b71b232202c48a29d4e6c34972c534c73
+PODFILE CHECKSUM: ce0b409316132297de4f98f5bc9f48d623114c32
 
 COCOAPODS: 1.15.2

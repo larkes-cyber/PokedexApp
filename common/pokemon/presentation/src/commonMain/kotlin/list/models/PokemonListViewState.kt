@@ -7,5 +7,6 @@ data class PokemonListViewState(
     val isLoading:Boolean = false,
     val error:String = "",
     val selectedPokemon:String? = null,
-    val offset:Int = 5
+    val offset:Int = 0,
+    val searchText:String = ""
 )

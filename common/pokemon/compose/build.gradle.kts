@@ -9,7 +9,6 @@ kotlin{
         androidMain{
             dependencies{
                 implementation(Dependencies.Other.ViewModel.compose)
-                implementation(Dependencies.Other.ViewModel.lifecycle)
                 implementation(Dependencies.Other.Navigation.core)
                 implementation(project(":common:compose-utils"))
             }

@@ -1,28 +1,53 @@
 package list
 
 import PokemonRepository
-import dev.icerock.moko.mvvm.flow.CMutableStateFlow
-import dev.icerock.moko.mvvm.flow.CStateFlow
-import dev.icerock.moko.mvvm.flow.cMutableStateFlow
-import dev.icerock.moko.mvvm.flow.cStateFlow
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
+import com.adeo.kviewmodel.BaseSharedViewModel
 import di.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import list.models.PokemonItem
 import list.models.PokemonListAction
 import list.models.PokemonListEvent
 import list.models.PokemonListViewState
 
-class PokemonListViewModel:ViewModel() {
+class PokemonListViewModel:BaseSharedViewModel<PokemonListViewState, PokemonListAction, PokemonListEvent>(
+    initialState = PokemonListViewState()
+) {
 
     private val pokemonRepository:PokemonRepository = Inject.di.get()
 
-    private val _viewState:CMutableStateFlow<PokemonListViewState> = MutableStateFlow(PokemonListViewState()).cMutableStateFlow()
-    val viewState:CStateFlow<PokemonListViewState> = _viewState.cStateFlow()
 
-    private val _viewAction:CMutableStateFlow<PokemonListAction?> = MutableStateFlow<PokemonListAction?>(null).cMutableStateFlow()
-    val viewAction:CStateFlow<PokemonListAction?> = _viewAction.cStateFlow()
+    override fun obtainEvent(viewEvent: PokemonListEvent) {
+        when(viewEvent){
+            is PokemonListEvent.PokemonClicked -> {
+                obtainPokemonClicked(id = viewEvent.id)
+            }
+            is PokemonListEvent.EndScrolled -> {
+                fetchNewPokemons()
+            }
+            is PokemonListEvent.SearchEntered -> {
+                obtainSearchEntered(viewEvent.text)
+            }
+        }
+    }
+
+    private fun obtainSearchEntered(text:String) {
+        viewModelScope.launch {
+            if(text.isEmpty()){
+                viewState = viewState.copy(offset = 0, list = emptyList())
+                fetchNewPokemons()
+            }else{
+                viewState = viewState.copy(isLoading = true)
+                val list = pokemonRepository.searchForPokemon(text)
+                viewState = viewState.copy(list = list.map {
+                    PokemonItem(
+                        name = it.name,
+                        id = it.id,
+                        imageSrc = it.imageUrl
+                    )
+                })
+            }
+        }
+    }
 
     init {
         fetchNewPokemons()
@@ -30,39 +55,29 @@ class PokemonListViewModel:ViewModel() {
 
    private fun fetchNewPokemons(refresh:Boolean = false){
         viewModelScope.launch {
-            _viewState.value = viewState.value.copy(isLoading = true)
+            viewState = viewState.copy(isLoading = true)
             try {
-                val pokemons = pokemonRepository.fetchPokemons(5, viewState.value.offset, refresh)
-                _viewState.value = viewState.value.copy(
-                    list = pokemons.map {PokemonItem(
-                                name = it.name,
-                                id = it.id,
-                                imageSrc = it.imageUrl
-                        )
-                    },
-                    offset = viewState.value.offset + 5
+                val pokemons = pokemonRepository.fetchPokemons(5, viewState.offset, refresh)
+                viewState = viewState.copy(list = viewState.list + pokemons.map {PokemonItem(
+                        name = it.name,
+                        id = it.id,
+                        imageSrc = it.imageUrl
+                    )},
+                    offset = viewState.offset + 5
                 )
             }catch (e:Exception){
-                _viewState.value = viewState.value.copy(error = e.message ?: "")
+                println(e.message)
+                viewState = viewState.copy(error = e.message ?: "")
             }finally {
-                _viewState.value = viewState.value.copy(isLoading = false)
+                viewState = viewState.copy(isLoading = false)
             }
         }
     }
 
-    fun onEvent(event:PokemonListEvent){
-
-        when(event){
-            is PokemonListEvent.PokemonClicked -> {
-                obtainPokemonClicked(id = event.id)
-            }
-        }
-
-    }
 
     private fun obtainPokemonClicked(id:String) {
-        _viewState.value = viewState.value.copy(selectedPokemon = id)
-        _viewAction.value = PokemonListAction.OpenPokemonDetail
+        viewState = viewState.copy(selectedPokemon = id)
+        viewAction = PokemonListAction.OpenPokemonDetail
     }
 
 }

@@ -46,9 +46,10 @@ class PokemonRepositoryTest {
     fun `Should fetch fresh pokemons`(){
        runBlocking {
            val limit = 5
-           val offset = 5
+           val offset = 0
            println("#### fetch started ####")
            val pokemons = repository.fetchPokemons(limit = limit, offset = offset, refresh = false)
+           println(pokemons)
            println("#### fetch ended ####")
            println(pokemons)
            pokemons.forEach {
@@ -65,12 +66,27 @@ class PokemonRepositoryTest {
         val limit = 5
         var offset = 5
         runBlocking {
-            val pokemons1 = repository.fetchPokemons(limit, offset, refresh = true)
+            val pokemons1 = repository.fetchPokemons(limit, offset, refresh = false)
             offset += 5
-            val pokemons2 = repository.fetchPokemons(limit, offset, refresh = true)
+            val pokemons2 = repository.fetchPokemons(limit, offset, refresh = false)
             pokemons1.forEachIndexed { index, pokemon ->
                 assertTrue(pokemon != pokemons2[index])
             }
+
+        }
+    }
+
+    @Test
+    fun `Should show cached pokemons`(){
+        val limit = 5
+        var offset = 5
+        runBlocking {
+            val pokemons1 = repository.fetchPokemons(limit, offset, refresh = false)
+            val pokemons2 = repository.fetchPokemons(limit, offset, refresh = false)
+            pokemons1.forEachIndexed { index, pokemon ->
+                assertEquals(pokemon, pokemons2[index])
+            }
+
         }
     }
 
