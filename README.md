@@ -46,8 +46,8 @@ https://github.com/larkes-cyber/PokedexApp/assets/79082708/71b57d55-a753-48e1-bd
 ## Architecture
 **PokedexApp** is based on the Multi-Module Concept, the MVI architecture and the Repository pattern
 
-<img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/503c2012-d204-430a-b816-7223d4afc356">
-<img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/8997f2bf-4a9c-461e-9860-a561ab9e1cbb">
+<img width="400" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/503c2012-d204-430a-b816-7223d4afc356">
+<img width="400" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/8997f2bf-4a9c-461e-9860-a561ab9e1cbb">
 
 The project includes 8 modules where: 2 android/iosApp, 1 feature, 2 core, 2 umbrella, 1 utils.
 
