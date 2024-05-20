@@ -31,7 +31,7 @@ https://github.com/larkes-cyber/PokedexApp/assets/79082708/71b57d55-a753-48e1-bd
   - Gradle kts: Gradle’s Kotlin DSL provides an alternative syntax to the traditional Groovy DSL with an enhanced editing experience in supported IDEs, with superior content assist.
 - Architecture
   - Multi-Module Concept: Modularization is a practice of organizing a codebase into loosely coupled and self contained parts. Each part is a module. Each module is independent and serves a clear purpose.
-  - [MVI/ViewModel](https://github.com/adeo-opensource/kviewmodel--mpp) Architecture: ViewModel hosts the UiState and initializes it with the default state. ViewModel handles the Intent/Action and Manipulates the UiState causing the View change.
+  - Shared [MVI/ViewModel](https://github.com/adeo-opensource/kviewmodel--mpp) Architecture: ViewModel hosts the UiState and initializes it with the default state. ViewModel handles the Intent/Action and Manipulates the UiState causing the View change.
   - [Koin](https://insert-koin.io/docs/reference/koin-mp/kmp/): Koin provides us with an all-in kotlin library to use it in our shared module to create injections that can be used by both Android and iOS
   - Repository Pattern: Repository commonly refers to a storage location, often for safety or preservation.
  - [SqlDelight](https://github.com/cashapp/sqldelight):SQLDelight is a powerful tool for implementing data persistence in Kotlin Multiplatform Mobile (KMM) projects
@@ -39,6 +39,9 @@ https://github.com/larkes-cyber/PokedexApp/assets/79082708/71b57d55-a753-48e1-bd
  - [Compose Navigation](https://developer.android.com/develop/ui/compose/navigation): The Navigation component provides support for Jetpack Compose applications. You can navigate between composables while taking advantage of the Navigation component's infrastructure and features.
  - [Coil](https://coil-kt.github.io/coil/compose/): Loading images from network.
  - [Serialization﻿](https://github.com/Kotlin/kotlinx.serialization): Kotlin serialization consists of a compiler plugin, that generates visitor code for serializable classes, runtime library with core serialization API and support libraries with various serialization formats.
+
+![image](https://github.com/larkes-cyber/PokedexApp/assets/79082708/5576b0f8-29ce-4016-952b-58c479490ff4)
+
 
 ## Architecture
 **PokedexApp** is based on the Multi-Module Concept, the MVI architecture and the Repository pattern
