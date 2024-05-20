@@ -45,8 +45,10 @@ https://github.com/larkes-cyber/PokedexApp/assets/79082708/71b57d55-a753-48e1-bd
 
 ## Architecture
 **PokedexApp** is based on the Multi-Module Concept, the MVI architecture and the Repository pattern
+
 <img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/503c2012-d204-430a-b816-7223d4afc356">
 <img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/8997f2bf-4a9c-461e-9860-a561ab9e1cbb">
+
 The project includes 8 modules where: 2 android/iosApp, 1 feature, 2 core, 2 umbrella, 1 utils.
 
 ### Android/iosApp
@@ -57,7 +59,9 @@ The UI for android implemented in the feature module, for ios was written in ios
 
 ### Feature Pokemon
 The feature is to show pokemons and pokemon detail info
+
 <img width="700" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/d55ffbf9-af81-4c3f-bd6e-e97ef08f267c">
+
 - **Api:** Contains repositories’s interfaces and data models 
 - **Data:** Contains the implemetation of the repositories and data sources
 - **Presentation:** Contains viewmodels
@@ -68,11 +72,12 @@ The feature is to show pokemons and pokemon detail info
 **Compose -> Presentation -> Api(Data)**
 
 ### Core
-Contains all http/database initialization and DI inject 
+Contains all http/database initialization and DI inject
+
 <img width="1351" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/07f7e1cc-bd48-4c78-9c64-e45f7c0385ed">
 
 ### Core-Root
-Contains PlatfromSDK that executes in android/ios app for initialzation business logic, then it injects into Inject singleton object
+Contains PlatfromSDK that executes in android/ios app for initialzation business logic, then it injects into the singleton object
 
 <img width="663" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/ac30da2c-d24b-4a8c-a4c8-a118be7a4cdc">
 
