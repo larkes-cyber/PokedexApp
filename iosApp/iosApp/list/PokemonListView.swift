@@ -43,14 +43,16 @@ struct PokemonListView: View {
             List{
                 ForEach(viewState.list, id:\.id){item in
                     PokemonListItem(pokemon: item)
+                        .contentShape(Rectangle())
+                        .onTapGesture(perform: {
+                            viewEvent(PokemonListEvent.PokemonClicked(id: item.id))
+                        })
                         .onAppear(perform: {
                             if(item == viewState.list.last){
                                 viewEvent(PokemonListEvent.EndScrolled())
                             }
                         })
-                        .onTapGesture(perform: {
-                            viewEvent(PokemonListEvent.PokemonClicked(id: item.id))
-                        })
+                        
                 }
                 
             }

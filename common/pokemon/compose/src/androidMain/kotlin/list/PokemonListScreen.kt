@@ -28,7 +28,12 @@ fun PokemonListScreen(
 
        when(viewAction.value){
            is PokemonListAction.OpenPokemonDetail -> {
-               navController.navigate(NavigationTree.Pokemon.List.name)
+               navController.navigate(
+                   NavigationTree.Pokemon.Detail.name + "/${viewState.value.selectedPokemon}"){
+                       popUpTo(NavigationTree.Pokemon.List.name) {
+                           inclusive = false
+                       }
+               }
            }
            else -> {}
        }

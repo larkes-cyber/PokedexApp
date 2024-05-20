@@ -1,6 +1,7 @@
 package list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,9 +41,6 @@ fun PokemonListView(
     viewState: PokemonListViewState,
     onEvent:(PokemonListEvent) -> Unit
 ) {
-
-    println(viewState.offset.toString() + " dfdfdfgdfgfgd")
-    println(viewState.list.toString() + " dfdfdfgdfgfgd")
 
     Column(
         modifier = Modifier.fillMaxSize().background(Color.White)
@@ -95,7 +93,9 @@ fun PokemonListView(
 
             itemsIndexed(viewState.list){index, item ->
                 Card(
-                    modifier = Modifier.fillMaxWidth().height(160.dp)
+                    modifier = Modifier.fillMaxWidth().height(160.dp).clickable {
+                        onEvent(PokemonListEvent.PokemonClicked(item.id))
+                    }
                 ) {
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
