@@ -16,6 +16,13 @@
 ## Download
 Go to the [Releases](https://github.com/larkes-cyber/PokedexApp/releases) to download the latest APK.
 
+## Main features
+- Ios/Android
+- Caching
+- Pagination
+  
+https://github.com/larkes-cyber/PokedexApp/assets/79082708/e0a3d3c3-0b89-4a06-95e5-0034abacf4f4
+
 ## Tech stack & Open-source libraries
 - Minimum SDK level 24
 -  [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/) based, [Jetpack Compose](https://developer.android.com/develop/ui/compose) + [SwiftUI](https://developer.apple.com/xcode/swiftui/) for ui interface.
@@ -63,13 +70,38 @@ Contains all http/database initialization and DI inject
 
 ### Core-Root
 Contains PlatfromSDK that executes in android/ios app for initialzation business logic, then it injects into Inject singleton object
-<img width="463" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/ac30da2c-d24b-4a8c-a4c8-a118be7a4cdc">
+<img width="663" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/ac30da2c-d24b-4a8c-a4c8-a118be7a4cdc">
 
 ### Compose-root
 Contains navigation + theme setup
 
 ### Ios-root
 Contains pod build gradle setup
+
+## Open API
+
+<img src="https://user-images.githubusercontent.com/24237865/83422649-d1b1d980-a464-11ea-8c91-a24fdf89cd6b.png" align="right" width="21%"/>
+
+PokedexApp using the [PokeAPI](https://pokeapi.co/) for constructing RESTful API.<br>
+PokeAPI provides a RESTful API interface to highly detailed objects built from thousands of lines of data related to Pokémon.
+
+# License
+```xml
+Designed and developed by 2024 larkes (Kirill Vasilev)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
 
 
 
