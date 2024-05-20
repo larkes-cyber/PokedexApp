@@ -33,4 +33,35 @@ Go to the [Releases](https://github.com/larkes-cyber/PokedexApp/releases) to dow
  - [Coil](https://coil-kt.github.io/coil/compose/): Loading images from network.
  - [Serialization﻿](https://github.com/Kotlin/kotlinx.serialization): Kotlin serialization consists of a compiler plugin, that generates visitor code for serializable classes, runtime library with core serialization API and support libraries with various serialization formats.
 
+## Architecture
+**PokedexApp** is based on the Multi-Module Concept, the MVI architecture and the Repository pattern
+<img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/503c2012-d204-430a-b816-7223d4afc356">
+<img width="500" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/8997f2bf-4a9c-461e-9860-a561ab9e1cbb">
+The project includes 8 modules where: 2 android/iosApp, 1 feature, 2 core, 2 umbrella, 1 utils.
+
+### Android/iosApp
+Contains default android/ios project where included shared business logic with umbrella moduels. 
+
+**Additional:**
+The UI for android implemented in the feature module, for ios was written in iosApp using SwiftUI
+
+### Feature Pokemon
+The feature is to show pokemons and pokemon detail info
+<img width="700" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/d55ffbf9-af81-4c3f-bd6e-e97ef08f267c">
+- **Api:** Contains repositories’s interfaces and data models 
+- **Data:** Contains the implemetation of the repositories and data sources
+- **Presentation:** Contains viewmodels
+- **Compose:** Contains android ui
+
+**UI -> ViewModels -> Repositories -> DataSource**
+
+**Compose -> Presentation -> Api(Data)**
+
+
+
+
+
+
+
+
  
