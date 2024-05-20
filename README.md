@@ -20,8 +20,8 @@ Go to the [Releases](https://github.com/larkes-cyber/PokedexApp/releases) to dow
 - Ios/Android
 - Caching
 - Pagination
-  
-https://github.com/larkes-cyber/PokedexApp/assets/79082708/e0a3d3c3-0b89-4a06-95e5-0034abacf4f4
+
+https://github.com/larkes-cyber/PokedexApp/assets/79082708/71b57d55-a753-48e1-bd2d-6a4f41b0ce75
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 24
