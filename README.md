@@ -57,6 +57,11 @@ The feature is to show pokemons and pokemon detail info
 
 **Compose -> Presentation -> Api(Data)**
 
+### Core
+Contains all http/database initialization and DI inject 
+<img width="1351" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/07f7e1cc-bd48-4c78-9c64-e45f7c0385ed">
+
+
 
 
 
