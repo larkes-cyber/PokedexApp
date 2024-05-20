@@ -12,5 +12,6 @@
 > [!TIP]
 > If you want to see more the Kotlin Multiplatfrom content, check out the [telegram](https://t.me/snikky_notes) channel.
 <img width="1000" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/bfef6e48-a5cd-4721-b228-f25e6757700d">
+
 ## Download
-Go to the [Releases]() to download the latest APK.
+Go to the [Releases](https://github.com/larkes-cyber/PokedexApp/releases) to download the latest APK.
