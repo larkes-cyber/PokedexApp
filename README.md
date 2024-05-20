@@ -61,6 +61,17 @@ The feature is to show pokemons and pokemon detail info
 Contains all http/database initialization and DI inject 
 <img width="1351" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/07f7e1cc-bd48-4c78-9c64-e45f7c0385ed">
 
+### Core-Root
+Contains PlatfromSDK that executes in android/ios app for initialzation business logic, then it injects into Inject singleton object
+<img width="463" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/ac30da2c-d24b-4a8c-a4c8-a118be7a4cdc">
+
+### Compose-root
+Contains navigation + theme setup
+
+### Ios-root
+Contains pod build gradle setup
+
+
 
 
 
