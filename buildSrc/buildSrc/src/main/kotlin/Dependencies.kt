@@ -68,10 +68,6 @@ object Dependencies {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
     }
 
-    object Settings{
-        private const val version = "1.1.0"
-        const val settings = "com.russhwolf:multiplatform-settings-no-arg:$version"
-    }
 
     object Other{
         object ViewModel{
