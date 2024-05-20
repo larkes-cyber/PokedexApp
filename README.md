@@ -70,6 +70,7 @@ Contains all http/database initialization and DI inject
 
 ### Core-Root
 Contains PlatfromSDK that executes in android/ios app for initialzation business logic, then it injects into Inject singleton object
+
 <img width="663" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/ac30da2c-d24b-4a8c-a4c8-a118be7a4cdc">
 
 ### Compose-root
