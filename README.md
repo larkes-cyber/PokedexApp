@@ -10,7 +10,7 @@
 </p>
 
 > [!TIP]
-> If you want to see more the Kotlin Multiplatform content, check out the [telegram](https://t.me/snikky_notes) channel.
+> If you want to see more the Kotlin Multiplatform content, check out the [telegram](https://t.me/sniky_notes) channel.
 <img width="1000" alt="image" src="https://github.com/larkes-cyber/PokedexApp/assets/79082708/bfef6e48-a5cd-4721-b228-f25e6757700d">
 
 ## Download
